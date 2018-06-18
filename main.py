@@ -37,7 +37,7 @@ class LabelTool():
         self.outDir = ''
         self.cur = 0
         self.total = 0
-        self.category = 0
+        self.category = 'train'
         self.imagename = ''
         self.labelfilename = ''
         self.tkimg = None
@@ -144,20 +144,20 @@ class LabelTool():
         if not dbg:
             s = self.entry.get()
             self.parent.focus()
-            self.category = int(s)
+            self.category = s
         else:
             s = r'D:\workspace\python\labelGUI'
 ##        if not os.path.isdir(s):
 ##            tkMessageBox.showerror("Error!", message = "The specified dir doesn't exist!")
 ##            return
         # get image list
-        self.imageDir = os.path.join(r'./Images', '%03d' %(self.category))
-        #print self.imageDir 
+        self.imageDir = os.path.join('/home/ruth/Documents/Bumblebee/data_qn18/images', self.category)
+        print self.imageDir 
         #print self.category
-        self.imageList = glob.glob(os.path.join(self.imageDir, '*.JPG'))
+        self.imageList = glob.glob(os.path.join(self.imageDir, '*.jpg'))
         #print self.imageList
         if len(self.imageList) == 0:
-            print 'No .JPG images found in the specified dir!'
+            print 'No .jpg images found in the specified dir!'
             return
 
         # default to the 1st image in the collection
@@ -165,7 +165,7 @@ class LabelTool():
         self.total = len(self.imageList)
 
          # set up output dir
-        self.outDir = os.path.join(r'./Labels', '%03d' %(self.category))
+        self.outDir = os.path.join('/home/ruth/Documents/Bumblebee/data_qn18/labels', self.category)
         if not os.path.exists(self.outDir):
             os.mkdir(self.outDir)
 
